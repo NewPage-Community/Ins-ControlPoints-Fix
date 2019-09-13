@@ -17,7 +17,6 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	HookEvent("controlpoint_captured", CPCapturedPre, EventHookMode_Pre);
-	HookEvent("controlpoint_captured", CPCaptured);
 	HookEvent("controlpoint_starttouch", CPStartTouch, EventHookMode_Post);
 	HookEvent("controlpoint_endtouch", CPEndTouch, EventHookMode_Post);
 }
@@ -53,20 +52,6 @@ public Action CPCapturedPre(Handle event, const char[] name, bool dontBroadcast)
 	
 	SetEventString(event, "cappers", FixCappers);
 	return Plugin_Changed;
-}
-
-public Action CPCaptured(Handle event, const char[] name, bool dontBroadcast)
-{
-	char cappers[MAXPLAYERS];
-	GetEventString(event, "cappers", cappers, sizeof(cappers));
-	int cappersLength = strlen(cappers);
-	for (int i = 0; i < cappersLength; i++)
-	{
-		int client = cappers[i];
-		if (IsClientInGame(client) && IsClientConnected(client) && IsPlayerAlive(client) && !IsFakeClient(client))
-			PrintToChatAll("[capper] %N", client);
-	}
-	return Plugin_Continue;
 }
 
 /*
