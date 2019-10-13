@@ -4,7 +4,7 @@ before_script:
   - make env
 
 build-1.10:
-  image: registry.new-page.xyz/newpage/sourcemod-builder:latest
+  image: $CI_REGISTRY/newpage/sourcemod-builder:latest
   stage: build
   variables:
     SOURCEMOD_VERSION: "1.10"
